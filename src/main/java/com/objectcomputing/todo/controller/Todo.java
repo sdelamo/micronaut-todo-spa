@@ -1,0 +1,24 @@
+package com.objectcomputing.todo.controller;
+
+import io.micronaut.core.annotation.Introspected;
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.serde.annotation.Serdeable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+@Serdeable
+public class Todo {
+    @Size(max = 255)
+    @NonNull
+    @NotBlank
+    private final String action;
+
+    public Todo(@NonNull String action) {
+        this.action = action;
+    }
+
+    @NonNull
+    public String getAction() {
+        return action;
+    }
+}

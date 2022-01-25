@@ -1,0 +1,47 @@
+micronaut:
+  application:
+    name: todo
+---
+micronaut:
+  router:
+    static-resources:
+      frontend:
+        paths: 'classpath:frontend'
+        mapping: '/**'
+---
+flyway:
+  datasources:
+    default:
+      enabled: true
+---
+micronaut:
+  security:
+    authentication: idtoken
+    oauth2:
+      clients:
+        google:
+          openid:
+            authorization:
+              prompt: select_account
+    endpoints:
+      logout:
+        get-allowed: true
+    intercept-url-map:
+      - pattern: /favicon.ico
+        http-method: GET
+        access:
+          - isAnonymous()
+      -
+        pattern: /
+        http-method: GET
+        access:
+          - isAnonymous()
+      -
+        pattern: /login-failed.html
+        http-method: GET
+        access:
+          - isAnonymous()
+---
+hosted-domain:
+  url: 'objectcomputing.com'
+
